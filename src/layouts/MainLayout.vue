@@ -2,34 +2,60 @@
   <q-layout view="hHr lpR ffr">
 
     <q-header elevated class="bg-primary text-white">
+      <q-img
+          class="header__image"
+          src="https://www.stockvault.net/data/2014/05/16/157358/preview16.jpg"
+          fit="cover"
+        />
       <q-toolbar>
+        <q-avatar>
+          <img src="~assets/mvs013.svg">
+        </q-avatar>
+
         <q-toolbar-title>
-          <q-avatar>
-            <img src="~assets/mvs013.svg">
-          </q-avatar>
           {{ mainTitle }}
         </q-toolbar-title>
+
+        <div class="today-date">
+          {{ todaysDate }}
+        </div>
 
         <q-btn dense flat round icon="menu" @click="toggleRightDrawer" />
       </q-toolbar>
     </q-header>
 
-    <q-drawer show-if-above v-model="rightDrawerOpen" side="right" bordered>
+    <q-drawer show-if-above v-model="rightDrawerOpen" side="right" bordered
+      :width="250"
+      :breakpoint="600"
+    >
       <!-- drawer content -->
       <SidePanel/>
     </q-drawer>
 
     <q-page-container>
-      <router-view />
+      <!-- keep-alive - Сохранение данных при обновлении страницы путём кеширования неактивных компонентов-->
+      <router-view v-slot="{ Component }">
+        <keep-alive>
+          <component :is="Component" />
+        </keep-alive>
+      </router-view>
+      <!-- <keep-alive>
+        <router-view />
+      </keep-alive> -->
     </q-page-container>
 
     <q-footer elevated class="bg-grey-8 text-white">
+      <q-img
+          class="header__image"
+          src="https://www.stockvault.net/data/2014/05/16/157358/preview16.jpg"
+          fit="cover"
+        />
       <q-toolbar>
+        <q-avatar>
+          <img src="~assets/mvs013.svg">
+        </q-avatar>
         <q-toolbar-title>
-          <q-avatar>
-            <img src="~assets/mvs013.svg">
-          </q-avatar>
-          <div>{{ mainTitle }}</div>
+          {{ mainTitle }}
         </q-toolbar-title>
       </q-toolbar>
     </q-footer>
@@ -40,6 +66,7 @@
 <script>
 import { defineComponent, ref } from 'vue'
 import SidePanel from '../components/SidePanel.vue'
+import { date } from 'quasar'
 
 export default defineComponent({
   name: 'MainLayout',
@@ -59,6 +86,22 @@ export default defineComponent({
         rightDrawerOpen.value = !rightDrawerOpen.value
       }
     }
+  },
+
+  computed: {
+    todaysDate() {
+      const timeStamp = Date.now()
+      return date.formatDate(timeStamp, 'dddd - DD.MMMM.YYYY - HH:mm')
+    }
   }
 })
 </script>
+
+<style lang="scss">
+.header__image{
+  height: 100%;
+  position: absolute;
+  z-index: -1;
+  opacity: 0.2;
+}
+</style>
