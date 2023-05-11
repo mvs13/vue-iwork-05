@@ -49,6 +49,14 @@
         </q-item-section>
       </q-item>
     </q-list>
+    <div
+      v-if="!todoList.length"
+      class="todo-list_empty q-mt-xl">
+      <div class="text-center">
+        <q-icon class="text-center" color="accent" name="fa-solid fa-mug-hot fa-beat" size="96px"/>
+      </div>
+      <div class="q-mt-xl text-h3 text-positive text-center">Damned fine coffee… And Hot!</div>
+    </div>
   </q-page>
 </template>
 
@@ -62,21 +70,21 @@ export default defineComponent({
     return {
       newTodo: '',
       todoList: [
-        {
-          id: uuidv4(),
-          whatDo: 'Just do it',
-          isDone: false
-        },
-        {
-          id: uuidv4(),
-          whatDo: 'Just do this',
-          isDone: false
-        },
-        {
-          id: uuidv4(),
-          whatDo: 'Do that',
-          isDone: false
-        }
+        // {
+        //   id: uuidv4(),
+        //   whatDo: 'Just do it',
+        //   isDone: false
+        // },
+        // {
+        //   id: uuidv4(),
+        //   whatDo: 'Just do this',
+        //   isDone: false
+        // },
+        // {
+        //   id: uuidv4(),
+        //   whatDo: 'Do that',
+        //   isDone: false
+        // }
       ]
     }
   },
@@ -160,5 +168,9 @@ export default defineComponent({
     text-decoration: line-through;
     color: gray;
   }
+}
+
+.todo-list_empty {
+  opacity: 0.9;
 }
 </style>
