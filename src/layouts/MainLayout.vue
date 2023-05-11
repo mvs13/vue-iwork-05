@@ -55,7 +55,7 @@
           <img src="~assets/mvs013.svg">
         </q-avatar>
         <q-toolbar-title>
-          {{ mainTitle }}
+          {{ mainSlogan }}
         </q-toolbar-title>
       </q-toolbar>
     </q-footer>
@@ -79,7 +79,8 @@ export default defineComponent({
     const rightDrawerOpen = ref(false)
 
     return {
-      mainTitle: 'MVS`s todo list',
+      mainTitle: 'MVS`s procrastinator',
+      mainSlogan: 'Don`t put it off until tomorrow, put it off today',
 
       rightDrawerOpen,
       toggleRightDrawer () {
